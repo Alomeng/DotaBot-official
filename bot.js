@@ -6,48 +6,49 @@ const client = new Client({ intents: [
         GatewayIntentBits.MessageContent,
     ]
 });
-const commads = require('./commads');
-let channel
-
+const commands = require('./commads');
+const randchat = require('./randomchat');
+const allowedServers = ['ID_server_1', 'ID_server_2']; 
+const allowedChannel = ['ID_channel_commands_1','ID_channel_commands_2'];
+const allowedRandChannel = ['ID_channel_chat_1', 'ID_channel_chat_2'];
 client.on('ready', () => {
-    console.log("Bot is ready!");
-    channel = client.channels.cache.get('996793720814960773');
+    console.log("Bot is ready!");   
 });
 
 client.on("messageCreate", message => {
+    //checks
+    if (!(allowedServers.includes(message.guild.id))) return;
+    if(!(allowedChannel.includes(message.channel.id)) && allowedRandChannel.includes(message.channel.id)) {
+        randchat.RundomChat(message);
+        return};
     if (message.author.bot) return;
-    if (!message.content.startsWith(PREFIX)){ 
-        var ChatWeb = [
-            "ПОН", "Мать жива?", "ОК.", "Иди нахуй хуеблот", "Лох обосанный", "Ты чмо и геральт",
-            "Ты случайно свою маму не терял? А она у меня под столом.", "Удали доту", "Лучше бы ты засох на трусах своего бати и никогда в жизни не открывал доту",
-            "Такое одобряем", "Братик , почаще в зеркало смотрись , там отрицательный айкью замечен", "завали ты уже своё рыло ноющий сын твари ",
-            "Саси хуй педик", "Соси хуй у отчима","Я знаю что ты дрочишь на свою мать"
+    if (!message.content.startsWith(PREFIX))return; 
 
-        ];
-        var randCh = Math.floor(Math.random() * 12) + 1; 
-        if(randCh == 2){
-            var RandE = ChatWeb[Math.floor(Math.random() * (ChatWeb.length))];
-            message.reply(RandE);   
-        };   
-        return;  
-    }
+    //remove the prefix
     const args = message.content.slice(PREFIX.length).toLowerCase().split(' ');
 
+    // command
     switch(args[0]) {
         case 'myotchim': 
-            commads.handleMyOtchim(message);
+            commands.MyOtchim(message);
             break;
         case 'natural':
-            commads.handleNatural(message);
+            commands.Natural(message);
             break;
         case 'dotahero':
-            commads.handleDotaHero(message);
+            commands.DotaHero(message);
             break;
         case 'dotaplay':
-            commads.handleDotaPlay(message);
+            commands.DotaPlay(message);
             break;
         case 'dotarange':
-            commads.handleDotaRange(message);
+            commands.DotaRange(message);
+            break;
+        case 'dotaupdate':
+            commands.DotaUpdate(message);
+            break;
+        case 'dhelp':
+            commands.Help(message);
             break;
     }
   });

@@ -1,13 +1,26 @@
 const { EmbedBuilder } = require('discord.js');
 
-function handleMyOtchim(message) {
+function MyOtchim(message) {
     var random = Math.floor(Math.random() * 500) + 1;
-    message.channel.send('Идёт подсчёт отчимов.....')
-    setTimeout( () =>{ message.channel.send('Почти закончил....')}, 4000)
-    setTimeout( () => {message.channel.send('Количество ваших отчимов: '+random)}, 5500)
+    message.channel.send('Начинается подсчёт отчимов!')
+        .then(sentMessage => {
+        let dots = '.';
+        const loading = setInterval(() => {
+            if(dots.length < 4){
+                dots += '.';
+            }else { 
+                dots='.';
+            }
+            sentMessage.edit(`Загрузка${dots}`);
+        }, 800);
+        setTimeout(() => {
+            clearInterval(loading);
+            sentMessage.edit('Почти закончил')}, 9000);
+            setTimeout( () =>{ sentMessage.edit('Количество ваших отчимов: '+random)}, 12500);
+        });   
 }
   
-function handleNatural(message) {
+function Natural(message) {
     let member = message.mentions.users.first() || message.author
     var randN = Math.floor(Math.random() * 100) + 1;
     const embed = new EmbedBuilder()
@@ -17,7 +30,7 @@ function handleNatural(message) {
     message.reply({embeds: [embed]})
 }
 
-function handleDotaHero(message){
+function DotaHero(message){
     var dota2Characters = [
         " Abaddon", " Alchemist", " Ancient Apparition", " Anti-Mage", " Arc Warden",
         " Axe", " Bane", " Batrider", " Beastmaster", " Bloodseeker",
@@ -45,20 +58,31 @@ function handleDotaHero(message){
     message.channel.send("Сегодня ты должен выйграть на"+RandElement)
 }
 
-function handleDotaPlay(message){
+function DotaPlay(message){
     var DotaPlay = [
         "Ебать да ты лох, проиграл в сухую!", "Вот нихуя себе не слил рейтинг, молодец!!",
         "Пиздец чуть-чуть до победы не хватило. Я мне что, мне похуй.", "Чуть не слился еблан!",
         "Ха лох на вайпере слился!", "Да с читами каждый может побеждать", "Ха лох проиграл! Ну это неудивительно, так как в первые минуты мид просрал",
-        "Пиздец, а как у тебя дота вылетела?", "ПО-Е-БАТЬ!"
+        "Пиздец, а как у тебя дота вылетела?", "ПО-Е-БАТЬ!", "Уф как жёстко отыграл на сапорте", "Хорошо проафкашел?", 
+        "Иди лучше в три в ряд покатай, как раз для тебя", "Невероятно! Ты слился!"
     ];
     var RandElement = DotaPlay[Math.floor(Math.random() * (DotaPlay.length))];
     message.channel.send("Вы начали катку!")
-    setTimeout(()=>{message.channel.send("Где-то середина катки")},6000)
-    setTimeout(()=>{message.channel.send(RandElement)},10000)
+        .then(sentMessage =>{
+            var num = 0;
+            const loading = setInterval(() => {
+                num += 2;
+                sentMessage.edit(`Катка идёт ${num}%`);
+            }, 150);
+            setTimeout(() => {
+                clearInterval(loading);
+                sentMessage.edit("Катка закончилась!");
+               }, 7900);
+        });
+    setTimeout(()=>{message.channel.send(RandElement)}, 17000);
 }
 
-function handleDotaRange(message){
+function DotaRange(message){
     let sam = ' ';
     var DotaRang = [
         "Рекрут", "Страж", "Рыцарь", "Герой", "Легенда", "Властелин", "Божество", "Титан"
@@ -73,20 +97,69 @@ function handleDotaRange(message){
     else if(RandRange > 4619 && RandRange < 5621) sam = DotaRang[6];
     else if(RandRange > 5620) sam = DotaRang[7];
     message.channel.send("Начинаем подсчёт твоего рейтинга!")
-    setTimeout(()=>{message.channel.send("Учитываем количество ваших отчимов")}, 2000)
-    setTimeout(()=>{message.channel.send("Не забываем о ваших оскорблениях родителей")}, 4000)
-    setTimeout(()=>{message.channel.send("Почти закончили")}, 8000)
-    setTimeout(() => {    
-        message.channel.send("Твой ранг: "+sam)
-        message.channel.send("Твой текущий рейтинга: "+RandRange)
-    }, 10000)
+    .then(sentMessage => {
+        let dots = '.';
+        const loading = setInterval(() => {
+            if(dots.length < 4){
+                dots += '.';
+            }else { 
+                dots='.';
+            }
+            sentMessage.edit(`Учитываем количество ваших отчимов${dots}`);
+        }, 800);
+        setTimeout(() => {
+            clearInterval(loading);
+            const loading1 = setInterval(() => {
+                if(dots.length < 4){
+                    dots += '.';
+                }else { 
+                    dots='.';
+                }
+                sentMessage.edit(`Не забываем о ваших оскорблениях родителей${dots}`);
+            }, 800);
+        setTimeout(() => {
+               clearInterval(loading1);
+               sentMessage.edit("Твой ранг: "+sam +"\nТвой текущий рейтинга: "+RandRange);
+            }, 14000);
+            }, 7000);
+        });
     
+}
+
+function DotaUpdate(message){
+    message.channel.send("Обновление началось")
+        .then(sentMessage =>{
+            var num = 0;
+            const loading = setInterval(() => {
+                num += 2;
+                sentMessage.edit(`Идёт обновление доты ${num}%`);
+            }, 50);
+            setTimeout(() => {
+                clearInterval(loading);
+                var RandUp = Math.floor(Math.random() * 4) + 1;
+                if(RandUp == 2){
+                    sentMessage.edit("ВЫ УСПЕШНО ОБНОВИЛИ ДОТУ!!!!");
+                }else{
+                    sentMessage.edit("Ошибка:(ноль, хуй саси, пять нулей, семь блядей) \n дота не обновилась(");
+                }
+               }, 3000);
+        });
+}
+
+function Help(message){
+    const embed = new EmbedBuilder()
+        .setTitle("ПОМОЩЬ")
+        .setDescription("На данный момент существует такие команды как: \n /myotchim \n /natural \n /dotahero \n /dotaplay \n /dotarange \n /dotaupdate \n /dhelp")
+        .setTimestamp(Date.now())
+    message.channel.send({embeds: [embed]})
 }
   
   module.exports = {
-    handleMyOtchim,
-    handleNatural,
-    handleDotaHero,
-    handleDotaPlay,
-    handleDotaRange,
+    MyOtchim,
+    Natural,
+    DotaHero,
+    DotaPlay,
+    DotaRange,
+    DotaUpdate,
+    Help,
   };
