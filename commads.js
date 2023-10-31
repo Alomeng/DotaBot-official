@@ -71,13 +71,13 @@ function DotaPlay(message){
         .then(sentMessage =>{
             var num = 0;
             const loading = setInterval(() => {
-                num += 2;
+                num += 5;
                 sentMessage.edit(`Катка идёт ${num}%`);
-            }, 150);
+            }, 200);
             setTimeout(() => {
                 clearInterval(loading);
                 sentMessage.edit("Катка закончилась!\n"+RandElement);
-               }, 7650);
+               }, 4200);
         });
     
 }
@@ -131,7 +131,7 @@ function DotaUpdate(message){
         .then(sentMessage =>{
             var num = 0;
             const loading = setInterval(() => {
-                num += 2;
+                num += 4;
                 sentMessage.edit(`Идёт обновление доты ${num}%`);
             }, 50);
             setTimeout(() => {
@@ -142,7 +142,7 @@ function DotaUpdate(message){
                 }else{
                     sentMessage.edit("Ошибка:(ноль, хуй саси, пять нулей, семь блядей) \n дота не обновилась(");
                 }
-               }, 2800);
+               }, 1550);
         });
 }
 
