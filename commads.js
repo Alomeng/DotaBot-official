@@ -32,7 +32,7 @@ function Natural(message) {
 
 function DotaHero(message){
     var dota2Characters = [
-        " Abaddon", " Alchemist", " Ancient Apparition", " Anti-Mage", " Arc Warden",
+        " Abaddon", " Alchemist", " Ancient Apparition", " Anti-Mage", " Arc Warden", " ТУРБИРОВАНЫЙ УНИТАЗ",
         " Axe", " Bane", " Batrider", " Beastmaster", " Bloodseeker",
         " Bounty Hunter", " Brewmaster", " Bristleback", " Broodmother",
         " Centaur Warrunner", " Chaos Knight", " Chen",  " Clinkz", " Clockwerk",
@@ -76,10 +76,10 @@ function DotaPlay(message){
             }, 150);
             setTimeout(() => {
                 clearInterval(loading);
-                sentMessage.edit("Катка закончилась!");
-               }, 7900);
+                sentMessage.edit("Катка закончилась!\n"+RandElement);
+               }, 7650);
         });
-    setTimeout(()=>{message.channel.send(RandElement)}, 17000);
+    
 }
 
 function DotaRange(message){
@@ -142,14 +142,14 @@ function DotaUpdate(message){
                 }else{
                     sentMessage.edit("Ошибка:(ноль, хуй саси, пять нулей, семь блядей) \n дота не обновилась(");
                 }
-               }, 3000);
+               }, 2800);
         });
 }
 
 function Help(message){
     const embed = new EmbedBuilder()
         .setTitle("ПОМОЩЬ")
-        .setDescription("На данный момент существует такие команды как: \n /myotchim \n /natural \n /dotahero \n /dotaplay \n /dotarange \n /dotaupdate \n /dhelp")
+        .setDescription("На данный момент существует такие команды как: \n /myotchim \n /natural \n /dotahero \n /dotaplay \n /dotarange \n /dotaupdate \n /dotahelp")
         .setTimestamp(Date.now())
     message.channel.send({embeds: [embed]})
 }

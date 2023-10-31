@@ -8,27 +8,28 @@ const client = new Client({ intents: [
 });
 const commands = require('./commads');
 const randchat = require('./randomchat');
-const allowedServers = ['ID_server_1', 'ID_server_2']; 
-const allowedChannel = ['ID_channel_commands_1','ID_channel_commands_2'];
-const allowedRandChannel = ['ID_channel_chat_1', 'ID_channel_chat_2'];
+const allowedServers = ['996793720286490674', '1032711895947411568']; 
+const allowedChannel = ['1016287384083640350','1143820839641436230'];
+const allowedRandChannel = ['996793720814960773', '1032711896681422920'];
 client.on('ready', () => {
     console.log("Bot is ready!");   
 });
 
 client.on("messageCreate", message => {
     //checks
+    if (message.author.bot) return;
     if (!(allowedServers.includes(message.guild.id))) return;
     if(!(allowedChannel.includes(message.channel.id)) && allowedRandChannel.includes(message.channel.id)) {
         randchat.RundomChat(message);
         return};
-    if (message.author.bot) return;
     if (!message.content.startsWith(PREFIX))return; 
 
     //remove the prefix
-    const args = message.content.slice(PREFIX.length).toLowerCase().split(' ');
-
+    const args = message.content.slice(PREFIX.length).trim().split(/ +/);
+    const command = args.shift().toLowerCase();
+  
     // command
-    switch(args[0]) {
+    switch(command) {
         case 'myotchim': 
             commands.MyOtchim(message);
             break;
@@ -47,7 +48,7 @@ client.on("messageCreate", message => {
         case 'dotaupdate':
             commands.DotaUpdate(message);
             break;
-        case 'dhelp':
+        case 'dotahelp':
             commands.Help(message);
             break;
     }
