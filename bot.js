@@ -8,9 +8,9 @@ const client = new Client({ intents: [
 });
 const commands = require('./commads');
 const randchat = require('./randomchat');
-const allowedServers = ['996793720286490674', '1032711895947411568']; 
-const allowedChannel = ['1016287384083640350','1143820839641436230'];
-const allowedRandChannel = ['996793720814960773', '1032711896681422920'];
+const allowedServers = ['ID_server_1', 'ID_server_2']; 
+const allowedChannel = ['ID_channel_commands_1','ID_channel_commands_2'];
+const allowedRandChannel = ['ID_channel_chat_1', 'ID_channel_chat_2'];
 client.on('ready', () => {
     console.log("Bot is ready!");   
 });
